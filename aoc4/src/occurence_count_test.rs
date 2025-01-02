@@ -149,3 +149,25 @@ mod diagonal {
         assert_eq!(10, occurrences);
     }
 }
+
+mod mas {
+    use crate::occurence_count::count_occurences_of_cross_mas;
+
+    #[test]
+    fn test_count_occurrences_of_cross_mas() {
+        let text = "MMMSXXMASM\n\
+                           MSAMXMSMSA\n\
+                           AMXSXMAAMM\n\
+                           MSAMASMSMX\n\
+                           XMASAMXAMM\n\
+                           XXAMMXXAMA\n\
+                           SMSMSASXSS\n\
+                           SAXAMASAAA\n\
+                           MAMMMXMMMM\n\
+                           MXMXAXMASX";
+
+        let occurrences = count_occurences_of_cross_mas(text);
+
+        assert_eq!(9, occurrences)
+    }
+}

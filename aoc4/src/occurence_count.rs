@@ -96,3 +96,34 @@ pub fn count_occurrences_of_xmas_diagonal(text: &str) -> u32 {
 
     occurrences
 }
+
+pub fn count_occurences_of_cross_mas(text: &str) -> u32 {
+    let mut occurrences = 0;
+
+    let lines = text
+        .lines()
+        .map(|line| line.as_bytes())
+        .collect::<Vec<&[u8]>>();
+
+    for line in lines.windows(3) {
+        for i in 0..line[0].len() - 2 {
+            if (is_sam(line[0][i], line[1][i + 1], line[2][i + 2])
+                || is_mas(line[0][i], line[1][i + 1], line[2][i + 2]))
+                && (is_sam(line[0][i + 2], line[1][i + 1], line[2][i])
+                    || is_mas(line[0][i + 2], line[1][i + 1], line[2][i]))
+            {
+                occurrences += 1;
+            }
+        }
+    }
+
+    occurrences
+}
+
+fn is_mas(first: u8, second: u8, third: u8) -> bool {
+    first == b'M' && second == b'A' && third == b'S'
+}
+
+fn is_sam(first: u8, second: u8, third: u8) -> bool {
+    first == b'S' && second == b'A' && third == b'M'
+}
